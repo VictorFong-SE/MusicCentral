@@ -1,13 +1,15 @@
 // myAIDL.aidl
 package com.vfong3.musiccentral;
 
+import android.os.Bundle;
+
 // Declare any non-default types here with import statements
 
 interface myAIDL
 {
-    void retrieveAllInfo();
+    Bundle retrieveAllInfo();
 
-    void retrieveSongInfo(int songNumber);
+    Bundle retrieveSongInfo(int songNumber);
 
-    void retrieveURL(int songNumber);
+    String retrieveURL(int songNumber);
 }
