@@ -1,3 +1,35 @@
 <resources>
+
     <string name="app_name">MusicCentral</string>
+
+    <string-array name="Titles">
+        <item>Summer</item>
+        <item>Ukulele</item>
+        <item>Creative Minds</item>
+        <item>A New Beginning</item>
+        <item>Little Idea</item>
+        <item>Jazzy Frenchy</item>
+        <item>Happy Rock</item>
+    </string-array>
+
+    <string-array name="Artists">
+        <item>Bensound</item>
+        <item>Bensound</item>
+        <item>Bensound</item>
+        <item>Bensound</item>
+        <item>Bensound</item>
+        <item>Bensound</item>
+        <item>Bensound</item>
+    </string-array>
+
+    <string-array name="urls">
+        <item>https://www.bensound.com/royalty-free-music/track/summer-chill-relaxed-tropical</item>
+        <item>https://www.bensound.com/royalty-free-music/track/ukulele</item>
+        <item>https://www.bensound.com/royalty-free-music/track/creative-minds</item>
+        <item>https://www.bensound.com/royalty-free-music/track/a-new-beginning</item>
+        <item>https://www.bensound.com/royalty-free-music/track/little-idea</item>
+        <item>https://www.bensound.com/royalty-free-music/track/jazzy-frenchy</item>
+        <item>https://www.bensound.com/royalty-free-music/track/happy-rock</item>
+    </string-array>
+
 </resources>

@@ -7,7 +7,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import androidx.core.app.NotificationCompat;
 
@@ -26,7 +28,7 @@ public class MusicCentral extends Service
 
         this.checkOreo();   //check if android running Oreo+ which needs notif channels.
 
-        final Intent notificationIntent = new Intent(getApplicationContext(),MusicCentral.class);
+        final Intent notificationIntent = new Intent(getApplicationContext(), MusicCentral.class);
         final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
@@ -35,7 +37,7 @@ public class MusicCentral extends Service
                 .setContentTitle("Music Central Running")
                 .setContentText("Tap to access Music Central")
                 .setTicker("Music Central Running!")
-                .setFullScreenIntent(pendingIntent,false)
+                .setFullScreenIntent(pendingIntent, false)
                 .build();
 
         startForeground(NOTIFICATION_ID, notification);
@@ -64,7 +66,26 @@ public class MusicCentral extends Service
     @Override
     public IBinder onBind(Intent intent)
     {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return binder;
     }
+
+
+    private final myAIDL.Stub binder = new myAIDL.Stub()
+    {
+        public void retrieveAllInfo() throws RemoteException
+        {
+            Bundle bundle = new Bundle();
+            //bundle.putParcelable();
+        }
+
+        public void retrieveSongInfo(int songNumber) throws RemoteException
+        {
+
+        }
+
+        public void retrieveURL(int songNumber) throws RemoteException
+        {
+
+        }
+    };
 }
