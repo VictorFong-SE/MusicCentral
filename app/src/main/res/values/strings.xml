@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">MusicCentral</string>
+    <string name="dummy_activity_for_debug">Dummy Activity for debug.</string>
 
     <string-array name="Titles">
         <item>Summer</item>

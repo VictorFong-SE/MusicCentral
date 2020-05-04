@@ -12,10 +12,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-
 import androidx.core.app.NotificationCompat;
 
+import com.vfong3.MusicCommon.myAIDL;
+
 import java.util.ArrayList;
+
 
 public class MusicCentral extends Service
 {
@@ -29,6 +31,11 @@ public class MusicCentral extends Service
     public static String[] urls;
     public ArrayList<Bitmap> bitmaps;
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
+        return START_STICKY;
+    }
 
     @Override
     public void onCreate()
@@ -65,6 +72,7 @@ public class MusicCentral extends Service
 
         startForeground(NOTIFICATION_ID, notification);
 
+
     }
 
 
@@ -98,21 +106,21 @@ public class MusicCentral extends Service
         public Bundle retrieveAllInfo() throws RemoteException
         {
             Bundle bundle = new Bundle();
-            bundle.putParcelable("song0", new Song(0, titles[0], artists[0], bitmaps.get(0), urls[0]));
-            bundle.putParcelable("song1", new Song(1, titles[1], artists[0], bitmaps.get(1), urls[1]));
-            bundle.putParcelable("song2", new Song(2, titles[2], artists[0], bitmaps.get(2), urls[2]));
-            bundle.putParcelable("song3", new Song(3, titles[3], artists[0], bitmaps.get(3), urls[3]));
-            bundle.putParcelable("song4", new Song(4, titles[4], artists[0], bitmaps.get(4), urls[4]));
-            bundle.putParcelable("song5", new Song(5, titles[5], artists[0], bitmaps.get(5), urls[5]));
-            bundle.putParcelable("song6", new Song(6, titles[6], artists[6], bitmaps.get(6), urls[6]));
 
+            ArrayList<Song> songs = new ArrayList<>();
+
+            for (int i = 0; i < 6; i++)
+            {
+                songs.add(new Song(i, titles[i], artists[i], bitmaps.get(i), urls[i]));
+            }
+            bundle.putParcelableArrayList("songs", songs);
             return bundle;
         }
 
         public Bundle retrieveSongInfo(int songNumber) throws RemoteException
         {
             Bundle bundle = new Bundle();
-            bundle.putParcelable("song0", new Song(songNumber, titles[songNumber], artists[songNumber], bitmaps.get(songNumber), urls[songNumber]));
+            bundle.putParcelable("song", new Song(songNumber, titles[songNumber], artists[songNumber], bitmaps.get(songNumber), urls[songNumber]));
             return bundle;
         }
 
