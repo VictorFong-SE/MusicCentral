@@ -4,25 +4,23 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <permission android:name="com.vfong3.Services.AIDL" />
+    <permission android:name="com.vfong3.project4.ACCESS_CENTRAL" />
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/AppTheme">
-
+        >
         <service
-            android:name=".MusicCentral"
+            android:name=".MusicService"
             android:label="MusicCentral"
             android:exported="true"
-            android:permission="com.vfong3.Services.AIDL">
+            android:permission="com.vfong3.project4.ACCESS_CENTRAL">
             <intent-filter>
-                <action android:name="com.vfong3.Services.MusicCentralService" />
+                <action android:name="com.vfong3.project4.MusicCentralService" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

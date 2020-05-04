@@ -19,7 +19,7 @@ import com.vfong3.MusicCommon.myAIDL;
 import java.util.ArrayList;
 
 
-public class MusicCentral extends Service
+public class MusicService extends Service
 {
     private Notification notification;
     private static final int NOTIFICATION_ID = 1; //keep track of itself
@@ -58,7 +58,7 @@ public class MusicCentral extends Service
 
         this.checkOreo();   //check if android running Oreo+ which needs notif channels.
 
-        final Intent notificationIntent = new Intent(getApplicationContext(), MusicCentral.class);
+        final Intent notificationIntent = new Intent(getApplicationContext(), MusicService.class);
         final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
