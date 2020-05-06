@@ -9,16 +9,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.os.RemoteException;
+
 import androidx.core.app.NotificationCompat;
 
-import com.vfong3.MusicCommon.myAIDL;
-
 import java.util.ArrayList;
-
-
+import java.util.Collections;
+import java.util.List;
+import com.vfong3.musiccommon.myAIDL;
 public class MusicService extends Service
 {
     private Notification notification;
@@ -103,28 +101,25 @@ public class MusicService extends Service
 
     private final myAIDL.Stub binder = new myAIDL.Stub()
     {
-        public Bundle retrieveAllInfo() throws RemoteException
+        List<Song> songs = Collections.synchronizedList(new ArrayList<Song>());
+
+        @Override
+        public void retrieveAllInfo(List<Song> songs)
         {
-            Bundle bundle = new Bundle();
-
-            ArrayList<Song> songs = new ArrayList<>();
-
             for (int i = 0; i < 6; i++)
             {
-                songs.add(new Song(i, titles[i], artists[i], bitmaps.get(i), urls[i]));
+                songs.add(new Song(titles[i], artists[i], bitmaps.get(i), urls[i]));
             }
-            bundle.putParcelableArrayList("songs", songs);
-            return bundle;
         }
 
-        public Bundle retrieveSongInfo(int songNumber) throws RemoteException
+        @Override
+        public void retrieveSongInfo(int songNumber,Song song)
         {
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("song", new Song(songNumber, titles[songNumber], artists[songNumber], bitmaps.get(songNumber), urls[songNumber]));
-            return bundle;
+            song =  new Song(titles[songNumber], artists[songNumber], bitmaps.get(songNumber), urls[songNumber]);
         }
 
-        public String retrieveURL(int songNumber) throws RemoteException
+        @Override
+        public String retrieveURL(int songNumber)
         {
             return urls[songNumber];
         }

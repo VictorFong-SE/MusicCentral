@@ -6,7 +6,12 @@ import android.os.Parcelable;
 
 public class Song implements Parcelable
 {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator()
+    public String title;
+    public String artist;
+    public Bitmap cover;
+    public String url;
+
+    public static final Parcelable.Creator<Song> CREATOR = new Parcelable.Creator<Song>()
     {
         public Song createFromParcel(Parcel in)
         {
@@ -18,30 +23,34 @@ public class Song implements Parcelable
         }
     };
 
-    private long id;
-    private String title;
-    private String artist;
-    private Bitmap cover;
-    private String url;
 
-    public Song(long id, String title, String artist, Bitmap cover, String url)
+
+    public Song(String title, String artist, Bitmap cover, String url)
     {
-        this.id = id;
         this.title = title;
         this.artist = artist;
         this.cover = cover;
         this.url = url;
     }
 
-    public long getId()
+
+    public Song(){}
+
+
+    private Song(Parcel in)
     {
-        return id;
+        this.title = in.readString();
+        this.artist = in.readString();
+        this.cover = in.readParcelable(Bitmap.class.getClassLoader());
+        this.url = in.readString();
     }
 
-    public void setId(long id)
+
+    public int describeContents()
     {
-        this.id = id;
+        return 0;
     }
+
 
     public String getTitle()
     {
@@ -83,39 +92,19 @@ public class Song implements Parcelable
         this.url = url;
     }
 
-    public Song(Parcel in)
-    {
-        this.id = in.readLong();
-        this.title = in.readString();
-        this.artist = in.readString();
-        this.cover = in.readParcelable(Bitmap.class.getClassLoader());
-        this.url = in.readString();
-    }
-
-    @Override
-    public int describeContents()
-    {
-        return 0;
-    }
-
-    @Override
     public void writeToParcel(Parcel dest, int flags)
     {
-        dest.writeLong(this.id);
         dest.writeString(this.title);
         dest.writeString(this.artist);
         dest.writeParcelable(this.cover, flags);
         dest.writeString(this.url);
     }
 
-    @Override
-    public String toString()
+    public void readFromParcel(Parcel in)
     {
-        return "Song{" +
-                "id='" + this.id + '\'' +
-                ", title='" + this.title + '\'' +
-                ", artist='" + this.artist + '\'' +
-                ", url='" + this.url + '\'' +
-                '}';
+        this.title = in.readString();
+        this.artist = in.readString();
+        this.cover = in.readParcelable(Bitmap.class.getClassLoader());
+        this.url = in.readString();
     }
 }

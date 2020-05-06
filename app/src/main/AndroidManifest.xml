@@ -13,12 +13,12 @@
         android:icon="@mipmap/ic_launcher"
         >
         <service
-            android:name=".MusicService"
+            android:name="com.vfong3.musiccentral.MusicService"
             android:label="MusicCentral"
             android:exported="true"
             android:permission="com.vfong3.project4.ACCESS_CENTRAL">
             <intent-filter>
-                <action android:name="com.vfong3.project4.MusicCentralService" />
+                <action android:name="com.vfong3.musiccentral.myAidl" />
             </intent-filter>
         </service>
     </application>
